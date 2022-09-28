@@ -1,0 +1,17 @@
+body > * {
+    margin-bottom: 1em;
+}
+
+svg {
+    margin-right: 1em;
+}
+
+.empty {
+    width: .5em;
+}
+
+#container{ 
+    height: 300px;
+    width: 1500px;
+    display: inline-block;
+}
