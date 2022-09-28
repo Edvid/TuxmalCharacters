@@ -18,18 +18,28 @@ function generate(){
 
     symbol.innerHTML = "";
 
-    let lastChecked = function() {
-        let lc = 0;
-        for (let i = 1; i <= 21; i++) {
-            if(~[10, 13, 17, 20].indexOf(i) != 0) continue;//the horizontals don't count
-            if(document.getElementById(`c${i}`).checked) lc = i;
+    let rows = function() {
+        let r = 1;
+        for (let i = 21; i > 0; i--) {
+            if(!document.getElementById(`c${i}`).checked) continue;
+            if(~[8, 9, 11, 12, 14, 17, 20].indexOf(i) != 0 && r < 2) r = 2;
+            if(~[15, 16, 18, 19, 21].indexOf(i) != 0 && r < 3) r = 3;
         }
-        return lc;
+        return r;
+    }();
+
+    let columns = function() {
+        let c = 1;
+        for (let i = 21; i > 0; i--) {
+            if(!document.getElementById(`c${i}`).checked) continue;
+            if(~[5, 6, 7, 12, 13, 14, 19, 20, 21].indexOf(i) != 0 && c < 2) c = 2;
+        }
+        return c;
     }();
 
     let margin = 4;
-    let YStep = (height - margin*2)/(Math.ceil(lastChecked/7));
-    let XStep = (width - margin*2)/2;
+    let YStep = (height - margin*2)/rows;
+    let XStep = (width - margin*2)/columns;
 
     let curCheckboxID = 1;
     for (let y = 0; y < 3; y++) {
